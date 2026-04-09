@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brooklynn Gleed - Professional Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles & Pink Color Palette */
+        :root {
+            --primary-color: #9d174d;    /* Deep Rose/Pink */
+            --secondary-color: #ed64a6;  /* Bright Pink Accent */
+            --text-color: #2d3748;       /* Dark Gray Text */
+            --text-light: #4a5568;       /* Medium Gray Text */
+            
+            /* Glassmorphism Variables */
+            --glass-bg: rgba(255, 255, 255, 0.55);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 8px 32px 0 rgba(157, 23, 77, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            /* Gradient background to make the glass effect visible */
+            background: linear-gradient(135deg, #fbc2eb 0%, #e6dee9 100%);
+            background-attachment: fixed;
+        }
+
+        /* Glass Effect Mixin */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Hero Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 15px;
+            color: var(--primary-color);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+        }
+
+        header p.subtitle {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Subtitle Link Styles */
+        header p.subtitle a {
+            color: #702459;
+            text-decoration: none;
+            margin: 0 10px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        header p.subtitle a:hover {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            border-radius: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Card Style for Sections */
+        .card {
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        h2.section-title {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            font-size: 1.8em;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        /* Entry Layouts (Experience & Education) */
+        .entry {
+            margin-bottom: 30px;
+        }
+
+        .entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .entry-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .entry-company {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .entry-date {
+            font-size: 0.95em;
+            font-weight: 600;
+            color: #fff;
+            background: var(--secondary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(237, 100, 166, 0.3);
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 12px 15px;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 0 8px 8px 0;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Contact Section Specifics */
+        .contact-info {
+            font-size: 1.1em;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+
+        .contact-info strong {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-light);
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .entry-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .entry-date {
+                margin-top: 5px;
+            }
+            header h1 {
+                font-size: 2.2em;
+            }
+            .card {
+                padding: 25px;
+            }
+            nav {
+                flex-wrap: wrap;
+                border-radius: 15px;
+            }
+            nav a {
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="glass-panel">
+        <h1>Brooklynn Gleed</h1>
+        <p class="subtitle"> 
+            <a href="../scratch.html">Barbie Ratings</a>
+            <a href="sushi.html">Sushi's Fish Feast</a>
+        </p>
+    </header>
+
+    <nav class="glass-panel">
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main class="container">
+
+        <section id="experience" class="card glass-panel">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="entry-title">In-home Caregiver</span>
+                    <span class="entry-date">May 2024 - Present</span>
+                </div>
+                <span class="entry-company">Orem In-Home Caregiver | Orem, UT</span>
+                <ul>
+                    <li>Assist with daily activities, medication management, personal hygiene support, meal preparation, and housekeeping.</li>
+                    <li>Create a safe, supportive environment through companionship, encouraging independence, and supporting family's overall care with patience, respect, and attention to individual needs.</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="entry-title">Game Master</span>
+                    <span class="entry-date">Sept 2022 - Aug 2023</span>
+                </div>
+                <span class="entry-company">Escapes in Time | Orem, UT</span>
+                <ul>
+                    <li>Welcomed and checked in guests to create a positive and memorable experience for all guests.</li>
+                    <li>Provided detailed game instructions, and monitored the progress of teams during their experience to ensure safety and engagement.</li>
+                    <li>Offered hints when necessary to enhance the customer experience and reset game rooms quickly and accurately between groups.</li>
+                    <li>Performed basic maintenance of props and room setups, helped troubleshoot technical issues.</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="entry-title">Shift Lead</span>
+                    <span class="entry-date">Sept 2021 - June 2022</span>
+                </div>
+                <span class="entry-company">Cold Stone/Cinnabon | Orem, UT</span>
+                <ul>
+                    <li>Performed regular team member duties, including customer service, preparing food, and maintaining a clean store environment.</li>
+                    <li>Acted as supervisor during shifts when a manager was not present.</li>
+                    <li>Assisted with inventory management, stocking supplies and monitoring product levels.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education" class="card glass-panel">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="entry-title">Bachelors of Science, Family Life</span>
+                    <span class="entry-date">Sept 2024 - April 2028</span>
+                </div>
+                <span class="entry-company">Brigham Young University | Provo, UT</span>
+                <p style="color: var(--text-light); margin-top: 5px;">Currently a Sophomore studying Family Life.</p>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="entry-title">High School Diploma</span>
+                    <span class="entry-date">Aug 2021 - May 2024</span>
+                </div>
+                <span class="entry-company">Orem High School | Orem, UT</span>
+                <ul>
+                    <li>Participated in several extracurricular activities while holding leadership positions in organizations such as Best Buddies, National Honor Society, Student Council, and Yearbook.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills" class="card glass-panel">
+            <h2 class="section-title">Skills & Languages</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Problem-solving & conflict resolution</div>
+                <div class="skill-item">Active listening & communication</div>
+                <div class="skill-item">Empathy and patience</div>
+                <div class="skill-item">Supervisory experience & collaborating</div>
+                <div class="skill-item">Strong multitasking & prioritizing</div>
+                <div class="skill-item">Handling valuable merchandise</div>
+                <div class="skill-item">Basic troubleshooting</div>
+                <div class="skill-item">Building rapport & adapting to roles</div>
+            </div>
+            
+            <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--primary-color);">Languages</h3>
+            <div class="skills-grid">
+                <div class="skill-item">English (Native)</div>
+                <div class="skill-item">American Sign Language (Intermediate)</div>
+            </div>
+        </section>
+
+        <section id="contact" class="card glass-panel">
+            <h2 class="section-title">Contact Info</h2>
+            <div class="contact-info">
+                <p><strong>Phone:</strong> (385) 314-7199</p>
+                <p><strong>Email:</strong> <a href="mailto:bgleed@gmail.com" style="color: var(--secondary-color); text-decoration: none;">bgleed@gmail.com</a></p>
+                <p><strong>Location:</strong> 676 E 1600 S, Orem, UT 84097</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        &copy; 2026 Brooklynn Gleed. All rights reserved.
+    </footer>
+
+</body>
+</html>

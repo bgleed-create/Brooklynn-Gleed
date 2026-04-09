@@ -1,0 +1,42 @@
+h1{
+    color: #E0218A;
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+ol{
+    text-align: left;
+    color: #F364A2;
+}
+.pics{
+   display: block;
+    float: right;
+    width: 600px
+}
+body{
+    background-color: #ffcfd8;
+    font-family: 'Times New Roman', Times, serif;
+}
+.header{
+    background-color: white;
+    height: 120px;
+}
+.mainbody{
+    background-color: #ffdaed;
+}
+.footer{
+    background-color: white;
+    color: #E0218A;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+.navbar{
+    font-size: medium;
+    text-align: left;
+}

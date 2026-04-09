@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi's Fish Feast</title>
+    <div class="navbar">
+         <a href="resume.html">Home Page</a> 
+         <a href="../scratch.html">Barbie Ratings</a>
+        </div>
+    <style>
+        .navbar{
+            font-size: medium;
+            text-align: left;
+        }
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            user-select: none; 
+        }
+
+        #game-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: #fff;
+            border: 4px solid #333;
+            overflow: hidden;
+        }
+
+        /* SUSHI THE CAT (Grey and White) */
+        #cat {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 70px;
+            height: 60px;
+            background: linear-gradient(to right, #777 50%, #eee 50%);
+            border-radius: 50% 50% 45% 45%; /* Rounder cat head */
+            z-index: 10;
+        }
+        
+        /* Left Ear (Grey) */
+        #cat::before { 
+            content: '';
+            position: absolute;
+            top: -15px; 
+            left: 2px;
+            width: 0; 
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 22px solid #777;
+            transform: rotate(-15deg);
+        }
+
+        /* Right Ear (White) */
+        #cat::after { 
+            content: '';
+            position: absolute;
+            top: -15px; 
+            right: 2px;
+            width: 0; 
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 22px solid #eee;
+            transform: rotate(15deg);
+        }
+
+        /* Cat Face Details */
+        .eye {
+            position: absolute;
+            top: 25px;
+            width: 8px;
+            height: 10px;
+            background-color: #222;
+            border-radius: 50%;
+            z-index: 11;
+        }
+        .eye.left { left: 15px; }
+        .eye.right { right: 15px; }
+        
+        .nose {
+            position: absolute;
+            top: 38px;
+            left: 30px;
+            width: 10px;
+            height: 6px;
+            background-color: #ff88aa; /* Pink nose */
+            border-radius: 50% 50% 50% 50%;
+            z-index: 11;
+        }
+
+        /* CONVEYOR BELT */
+        #belt {
+            position: absolute;
+            top: 150px;
+            width: 100%;
+            height: 40px;
+            background-color: #555;
+            border-top: 4px solid #333;
+            border-bottom: 4px solid #333;
+        }
+
+        /* GAME ITEMS (Emojis!) */
+        .item {
+            position: absolute;
+            top: 135px; 
+            cursor: pointer;
+            font-size: 45px; 
+            line-height: 1;
+            transition: transform 0.1s;
+            z-index: 5;
+        }
+        
+        .item:hover { 
+            transform: scale(1.2); 
+        }
+
+        #ui {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="ui">
+        <h1>Score: <span id="score">0</span></h1>
+        <p>Click <b>Fish</b> 🐟. Do NOT click <b>Sushi</b> 🍣!</p>
+    </div>
+
+    <div id="game-container">
+        <div id="cat">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="nose"></div>
+        </div>
+        <div id="belt"></div>
+    </div>
+
+    <script>
+        const container = document.getElementById('game-container');
+        const scoreElement = document.getElementById('score');
+        
+        let score = 0;
+        let speed = 3; 
+        let spawnRate = 1500; 
+
+        function createItem() {
+            const item = document.createElement('div');
+            const isSushi = Math.random() > 0.7; 
+            
+            item.className = 'item';
+            item.innerText = isSushi ? '🍣' : '🐟'; 
+            
+            item.style.left = '-50px'; 
+            container.appendChild(item);
+
+            let pos = -50;
+            
+            const move = setInterval(() => {
+                pos += speed;
+                item.style.left = pos + 'px';
+
+                if (pos > 600) {
+                    clearInterval(move);
+                    item.remove();
+                }
+            }, 20);
+
+            item.onclick = () => {
+                if (isSushi) {
+                    alert("Oh no! Sushi the cat can't eat sushi! Final Score: " + score);
+                    resetGame();
+                } else {
+                    score++;
+                    scoreElement.innerText = score;
+                    
+                    if (score % 5 === 0) {
+                        speed += 1;
+                    }
+                }
+                clearInterval(move);
+                item.remove();
+            };
+        }
+
+        function resetGame() {
+            score = 0;
+            speed = 3;
+            scoreElement.innerText = score;
+            const items = document.querySelectorAll('.item');
+            items.forEach(i => i.remove());
+        }
+
+        setInterval(createItem, spawnRate);
+
+    </script>
+</body>
+</html>
